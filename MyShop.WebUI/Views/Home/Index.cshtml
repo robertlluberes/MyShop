@@ -1,10 +1,21 @@
-﻿@model IEnumerable<MyShop.Core.Models.Product>
+﻿@model MyShop.Core.ViewMoldels.ProductListViewModel
 
 @{
     ViewBag.Title = "Home Page";
 }
 
-@foreach (var item in Model)
+<div class="col-md-2">
+    <h4>Filter by Category</h4>
+    <div class="list-group">
+        @Html.ActionLink("All", "Index", null, new { @class = "category-label label label-default" })
+        @foreach (var cat in Model.ProductCategories)
+        {
+            @Html.ActionLink(" " + cat.Category + " ", "Index", new { Category = cat.Category}, new { @class = "category-label label label-default" })
+        }
+    </div>
+</div>
+
+@foreach (var item in Model.Product)
 {
     <div class="col-md-2" style="height:450px;padding:10px;margin:10px;border:solid thin whitesmoke">
         <div class="col-md-12">
