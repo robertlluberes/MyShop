@@ -40,6 +40,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Contracts\IBasketService.cs" />
     <Compile Include="Contracts\IRepository.cs" />
     <Compile Include="Models\BaseEntity.cs" />
     <Compile Include="Models\Basket.cs" />
@@ -47,6 +48,8 @@
     <Compile Include="Models\Product.cs" />
     <Compile Include="Models\ProductCategory.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="ViewMoldels\BasketItemViewModel.cs" />
+    <Compile Include="ViewMoldels\BasketSummaryViewModel.cs" />
     <Compile Include="ViewMoldels\ProductListViewModel.cs" />
     <Compile Include="ViewMoldels\ProductManagerViewModel.cs" />
   </ItemGroup>
