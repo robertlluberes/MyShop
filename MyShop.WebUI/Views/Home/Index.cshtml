@@ -4,38 +4,41 @@
     ViewBag.Title = "Home Page";
 }
 
-<div class="col-md-2">
-    <h4>Filter by Category</h4>
-    <div class="list-group">
-        @Html.ActionLink("All", "Index", null, new { @class = "category-label label label-default" })
-        @foreach (var cat in Model.ProductCategories)
-        {
-            @Html.ActionLink(" " + cat.Category + " ", "Index", new { Category = cat.Category}, new { @class = "category-label label label-default" })
+<div class="row" style="margin-top:25px;">
+
+    <div class="col-md-2">
+        <h4><strong>Filter By Category</strong></h4>
+        <div class="list-group">
+            @Html.ActionLink("All", "Index", null, new { @class = Request["Category"] == null ? "list-group-item active" : "list-group-item" })
+            @foreach (var Category in Model.ProductCategories)
+            {
+
+                @Html.ActionLink(Category.Category, "Index", new { Category = Category.Category }, new { @class = Request["Category"] == Category.Category ? "list-group-item active" : "list-group-item" })
+            }
+        </div>
+    </div>
+
+    <div class="col-md-10">
+        @foreach (var item in Model.Product)
+            {
+            <div class="col-sm-6 col-md-4">
+                <div class="thumbnail">
+                    <img src="~/Content/ProductImages/@item.Image" alt="@item.Description" class="img-responsive" style="height:250px;">
+                    <div class="caption">
+                        <h3><strong>@Html.ActionLink(item.Name, "Details", new { Id = item.Id }, new { @class = "active" })</strong></h3>
+                        <p>@item.Description</p>
+                        <div class="row">                   
+                            <div class="col-md-6 price">
+                                <p><strong>@string.Format("{0:c}", @item.Price)</strong></p>
+                            </div>
+                            <div class="col-md-6">
+                                <p><a href="@Url.Action("AddToBasket","Basket", new { Id = @item.Id})" class="btn btn-primary">Add to basket</a></p>
+                            </div> 
+                        </div>
+                    </div>
+                </div>
+            </div>
         }
     </div>
-</div>
-
-@foreach (var item in Model.Product)
-{
-    <div class="col-md-2" style="height:450px;padding:10px;margin:10px;border:solid thin whitesmoke">
-        <div class="col-md-12">
-            <img src="~/Content/ProductImages/@item.Image" alt="@item.Description" style="width:150px;height:150px;margin-bottom:15px;" class="img-responsive img-thumbnail" />
-        </div>
-        <div class="col-md-12">
-            <strong>@Html.ActionLink(item.Name, "Details", new { Id = item.Id})</strong>
-        </div>
-        <div class="col-md-12">
-            <p>@item.Description</p>
-        </div>
-        <div class="col-md-12">
-            <p>@item.Price</p>
-        </div>
-        <div class="col-md-12">
-            <a href="@Url.Action("AddToBasket","Basket", new { Id = @item.Id})" class="btn btn-default">Add to basket</a>
-        </div>
-    </div>
-}
-
-<div class="clearfix" >
-
+    <div class="clearfix"></div>
 </div>
