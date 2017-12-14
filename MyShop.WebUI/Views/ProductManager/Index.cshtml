@@ -1,13 +1,13 @@
 ﻿@model IEnumerable<MyShop.Core.Models.Product>
 
 @{
-    ViewBag.Title = "Index";
+    ViewBag.Title = "Products";
 }
 
-<h2>Index</h2>
+<h2>Products</h2>
 
 <p>
-    @Html.ActionLink("Create New", "Create")
+    @Html.ActionLink("Create New", "Create", new { }, new { @class= "btn btn-primary"})
 </p>
 <table class="table">
     <tr>
@@ -32,7 +32,7 @@
 @foreach (var item in Model) {
     <tr>
         <td>
-            @Html.DisplayFor(modelItem => item.Name)
+           <strong>@Html.DisplayFor(modelItem => item.Name)</strong>
         </td>
         <td>
             @Html.DisplayFor(modelItem => item.Description)
@@ -44,11 +44,11 @@
             @Html.DisplayFor(modelItem => item.Category)
         </td>
         <td>
-            <img src="~/Content/ProductImages/@item.Image" alt="@item.Description" class="img-thumbnail" style="max-width:200px;" />
+            <img src="~/Content/ProductImages/@item.Image" alt="@item.Description" class="img-thumbnail" style="max-width:200px;max-height:200px;" />
         </td>
         <td>
-            @Html.ActionLink("Edit", "Edit", new { id=item.Id }) |
-            @Html.ActionLink("Delete", "Delete", new { id=item.Id })
+            @Html.ActionLink("Edit", "Edit", new { id=item.Id }, new { @class= "btn btn-warning btn-sm"}) |
+            @Html.ActionLink("Delete", "Delete", new { id=item.Id }, new { @class = "btn btn-danger btn-sm" })
         </td>
     </tr>
 }
